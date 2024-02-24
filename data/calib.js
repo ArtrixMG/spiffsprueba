@@ -10,8 +10,8 @@ function IngresarDatos() {
     $.ajax({
         type: "GET", // Método de la solicitud
         url: "/obtenerMedicion",
-        data:datos, // URL del servidor al que estás enviando los datos
-         // Los datos que estás enviando
+        data: datos, // URL del servidor al que estás enviando los datos
+        // Los datos que estás enviando
         success: function (response) {
             // La función que se ejecutará si la solicitud es exitosa
             parrafo.innerHTML = response;
@@ -25,7 +25,7 @@ function IngresarDatos() {
 
 }
 
-function agregarDatos(){
+function agregarDatos() {
     var contenidoDeLista = document.createElement("li");
 
     contenidoDeLista.classList = "contenidoDeLista";
@@ -38,21 +38,20 @@ function agregarDatos(){
 
 }
 
-function cambioEstado(Ingreso) {
-    estadoActual = Ingreso?responseIngreso[0]: responseIngreso[1];
+function callStateValue(ingreso) {
+    estadoActual = ingreso ? responseIngreso[0] : responseIngreso[1];
     return estadoActual;
+}// devuelve la posicion dependiendo del estado actual de la variable
 
+function cambiodeFlag(boolean) {
+    flag = boolean;
 }
 
-function cambiodeFlag(){
-    flag = !flag;
-}
-
-botonVolt.addEventListener("click", {flag: false});
-botonRes.addEventListener("click", {flag: true});
+botonVolt.addEventListener("click", cambiodeFlag(false));
+botonRes.addEventListener("click",cambiodeFlag(true));
 
 setInterval(() => {
-    cambioEstado(estadoActual);
+    callStateValue(estadoActual);
     IngresarDatos();
     agregarDatos();
 }, 500);
