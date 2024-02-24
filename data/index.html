@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="estilos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tester</title>
+</head>
+
+<body>
+    <div class="tituloPantalla">Tester WIFI</div>
+    <img src="./escudo.jpeg" class="escudo">
+    <p class="parrafo" id="parrafo"> 0</p>
+     <div class="contenedorBotones">
+        <button onclick="cambioEstado()" class="botonPerso" id="botonVoltaje">VOLT</button>
+        <button onclick="cambioEstado()" class="botonPerso" id="botonResistencia">RES</button>
+    </div>
+    <div class="contenedorDeLista" id="contenerDeLista"> <ul id="vistaDatos"></ul> </div>
+</body>
+<script src="jquery.min.js"></script>
+<script src="calib.js"></script>
+
+</html>
