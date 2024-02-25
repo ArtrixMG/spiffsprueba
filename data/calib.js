@@ -14,6 +14,20 @@ var verDatos = document.getElementById("vistaDatos");
 
 var responseIngreso;
 
+function callStateValue(ingreso = false) {
+    estadoActual = ingreso ? responseIngreso[0] : responseIngreso[1];
+    return estadoActual;
+}// devuelve la posicion dependiendo del estado actual de la variable
+
+function cambiodeFlag(boolean) {
+    flag = boolean;
+}
+
+botonVolt.addEventListener('click', cambiodeFlag(false));
+
+botonRes.addEventListener("click", cambiodeFlag(true));
+
+
 function IngresarDatos() {
     // Supongamos que deseas enviar el dato 1234 al servidor
 
@@ -30,9 +44,10 @@ function IngresarDatos() {
         // Los datos que estás enviando
         success: function (response) {
             // La función que se ejecutará si la solicitud es exitosa
-            parrafo.innerHTML = response;
-            console.log('respon: ' + responseIngreso);
             responseIngreso = response.split("&");
+            parrafo.innerHTML = callStateValue();
+            console.log('respon: ' + responseIngreso);
+            //responseIngreso = response.split("&");
 
         },
         error: function (error) {
@@ -55,18 +70,7 @@ function agregarDatos() {
 
 }
 
-function callStateValue(ingreso = false) {
-    estadoActual = ingreso ? responseIngreso[0] : responseIngreso[1];
-    return estadoActual;
-}// devuelve la posicion dependiendo del estado actual de la variable
 
-function cambiodeFlag(boolean) {
-    flag = boolean;
-}
-
-botonVolt.addEventListener('click', cambiodeFlag(false));
-
-botonRes.addEventListener("click", cambiodeFlag(true));
 
 setInterval(() => {
 
