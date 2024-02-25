@@ -67,7 +67,6 @@ function cambiodeFlag(boolean) {
     flag = boolean;
 }
 
-
 setInterval(() => {
     IngresarDatos();
     agregarDatos();
