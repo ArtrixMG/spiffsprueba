@@ -1,3 +1,19 @@
+var contenedorLista = document.getElementById("contenerDeLista");
+
+var estadoActual;
+
+var flag = true;
+
+var botonVolt = document.getElementById("botonVoltaje");
+
+var botonRes = document.getElementById("botonResistencia");
+
+var parrafo = document.getElementById("parrafo");
+
+var verDatos = document.getElementById("vistaDatos");
+
+var responseIngreso;
+
 function IngresarDatos() {
     // Supongamos que deseas enviar el dato 1234 al servidor
 
@@ -15,14 +31,15 @@ function IngresarDatos() {
         success: function (response) {
             // La función que se ejecutará si la solicitud es exitosa
             parrafo.innerHTML = response;
+            console.log('respon: ' + responseIngreso);
             responseIngreso = response.split("&");
+
         },
         error: function (error) {
             // La función que se ejecutará si hay un error en la solicitud
             console.error("Error en la solicitud", error);
         }
     });
-
 }
 
 function agregarDatos() {
@@ -30,7 +47,7 @@ function agregarDatos() {
 
     contenidoDeLista.classList = "contenidoDeLista";
 
-    contenidoDeLista.innerHTML = cambiodeEstado;
+    contenidoDeLista.innerHTML = estadoActual;
 
     verDatos.appendChild(contenidoDeLista);
 
@@ -38,7 +55,7 @@ function agregarDatos() {
 
 }
 
-function callStateValue(ingreso) {
+function callStateValue(ingreso = false) {
     estadoActual = ingreso ? responseIngreso[0] : responseIngreso[1];
     return estadoActual;
 }// devuelve la posicion dependiendo del estado actual de la variable
@@ -47,25 +64,13 @@ function cambiodeFlag(boolean) {
     flag = boolean;
 }
 
-botonVolt.addEventListener("click", cambiodeFlag(false));
-botonRes.addEventListener("click",cambiodeFlag(true));
+botonVolt.addEventListener('click', cambiodeFlag(false));
+
+botonRes.addEventListener("click", cambiodeFlag(true));
 
 setInterval(() => {
-    callStateValue(estadoActual);
+
     IngresarDatos();
+    callStateValue(estadoActual);
     agregarDatos();
 }, 500);
-
-var contenedorLista = document.getElementById("contenerDeLista");
-
-var estadoActual;
-
-var flag = true;
-
-var botonVolt = document.getElementById("botonVoltaje");
-
-var botonRes = document.getElementById("botonResistencia");
-
-var parrafo = document.getElementById("parrafo");
-
-var verDatos = document.getElementById("vistaDatos");
