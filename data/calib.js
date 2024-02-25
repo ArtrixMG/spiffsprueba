@@ -30,9 +30,9 @@ function IngresarDatos() {
         // Los datos que estás enviando
         success: function (response) {
             // La función que se ejecutará si la solicitud es exitosa
-            parrafo.innerHTML = response;
-            console.log('respon: ' + responseIngreso);
+            parrafo.innerHTML = response;            
             responseIngreso = response.split("&");
+            console.log('respon: ' + responseIngreso);
 
         },
         error: function (error) {
@@ -42,12 +42,14 @@ function IngresarDatos() {
     });
 }
 
+IngresarDatos();
+
 function agregarDatos() {
     var contenidoDeLista = document.createElement("li");
 
     contenidoDeLista.classList = "contenidoDeLista";
 
-    contenidoDeLista.innerHTML = estadoActual;
+    contenidoDeLista.innerHTML = callStateValue(flag);
 
     verDatos.appendChild(contenidoDeLista);
 
@@ -55,7 +57,8 @@ function agregarDatos() {
 
 }
 
-function callStateValue(ingreso = false) {
+function callStateValue(ingreso = true) {
+    console.log('el response: ' +responseIngreso)
     estadoActual = ingreso ? responseIngreso[0] : responseIngreso[1];
     return estadoActual;
 }// devuelve la posicion dependiendo del estado actual de la variable
@@ -69,8 +72,6 @@ botonVolt.addEventListener('click', cambiodeFlag(false));
 botonRes.addEventListener("click", cambiodeFlag(true));
 
 setInterval(() => {
-
     IngresarDatos();
-    callStateValue(estadoActual);
     agregarDatos();
 }, 500);

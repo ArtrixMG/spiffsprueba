@@ -101,7 +101,7 @@ void iniciarServer(void)
     } });
 
   server.on("/obtenerMedicion", HTTP_GET, [](AsyncWebServerRequest *request) { // cuando hay una solicitud de medicion lo devuelvo
-    request->send(200, "text/plain", String(res) + String("&") + String(resr));
+    request->send(200, "text/plain", String(11)+ String(res) + String("&") + String(22)+ String(resr));
     //request->send(200, "text/plain", String(random(10, 99)) + String(" ") + String(random(0, 3)) + String(" ") + String(152));
 
   });
