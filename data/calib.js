@@ -2,79 +2,70 @@ var contenedorLista = document.getElementById("contenerDeLista");
 
 var estadoActual;
 
-var flag = true;
-
-var botonVolt = document.getElementById("botonVoltaje");
-
-var botonRes = document.getElementById("botonResistencia");
-
-var parrafo = document.getElementById("parrafo");
+var flag = 0;
 
 var verDatos = document.getElementById("vistaDatos");
 
 var responseIngreso;
 
-function callStateValue(ingreso = false) {
-    estadoActual = ingreso ? responseIngreso[0] : responseIngreso[1];
-    return estadoActual;
-}// devuelve la posicion dependiendo del estado actual de la variable
-
-function cambiodeFlag(boolean) {
-    flag = boolean;
-}
-
-botonVolt.addEventListener('click', cambiodeFlag(false));
-
-botonRes.addEventListener("click", cambiodeFlag(true));
-
-
 function IngresarDatos() {
-    // Supongamos que deseas enviar el dato 1234 al servidor
+    // Supongamos que deseas enviar el dato 1234 al servidor.
 
-    // Objeto de datos que deseas enviar
+    // Objeto de datos que deseas enviar.
     var datos = {
         led: 1234
     };
 
-    // Realiza la solicitud POST con AJAX
+    // Realiza la solicitud POST con AJAX.
     $.ajax({
-        type: "GET", // Método de la solicitud
+        type: "GET", // Método de la solicitud.
         url: "/obtenerMedicion",
-        data: datos, // URL del servidor al que estás enviando los datos
-        // Los datos que estás enviando
+        data: datos, // URL del servidor al que estás enviando los datos.
+        // Los datos que estás enviando.
+
         success: function (response) {
-            // La función que se ejecutará si la solicitud es exitosa
+            // La función que se ejecutará si la solicitud es exitosa.
+
             responseIngreso = response.split("&");
-            parrafo.innerHTML = callStateValue();
+            /****** response.split("&") es una funcion para separar en una matriz los elementos que
+            esten separados por el caracter seleccionado.**********/
+
             console.log('respon: ' + responseIngreso);
-            //responseIngreso = response.split("&");
 
         },
         error: function (error) {
-            // La función que se ejecutará si hay un error en la solicitud
+            // La función que se ejecutará si hay un error en la solicitud.
             console.error("Error en la solicitud", error);
         }
     });
-}
+}// Recibe los datos del ESP desde el archivo /main.cpp y los guarda para separarlos.
+
+IngresarDatos();
 
 function agregarDatos() {
     var contenidoDeLista = document.createElement("li");
 
     contenidoDeLista.classList = "contenidoDeLista";
 
-    contenidoDeLista.innerHTML = estadoActual;
+    contenidoDeLista.innerHTML = callStateValue(flag);
 
     verDatos.appendChild(contenidoDeLista);
 
     contenedorLista.scrollTop = contenedorLista.scrollHeight;
+}// Pasa la informacion al archivo /index.html para muestrearlos en la lista definida de muestra de datos.
 
-}
+function callStateValue(ingreso) {
+    console.log('el response: ' +responseIngreso)
+    responseIngreso[ingreso];
 
+    return responseIngreso[ingreso];
+}// Devuelve la posicion dependiendo del estado actual de la variable.
 
+function cambiodeFlag(numberFunction) {
+    flag = numberFunction;
+}// Recupera el valor dado en los botones del /index.html y lo guarda en la variable.
 
 setInterval(() => {
-
     IngresarDatos();
-    callStateValue(estadoActual);
     agregarDatos();
-}, 500);
+}, 500);// Intervalo de espera.

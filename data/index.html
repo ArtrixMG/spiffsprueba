@@ -10,15 +10,17 @@
 
 <body>
     <div class="tituloPantalla">Tester WIFI</div>
-    <img src="./escudo.jpeg" class="escudo">
-    <p class="parrafo" id="parrafo"> 0</p>
+    <img src="./escudo.png" class="escudo">
      <div class="contenedorBotones">
-        <button onclick="cambioEstado()" class="botonPerso" id="botonVoltaje">VOLT</button>
-        <button onclick="cambioEstado()" class="botonPerso" id="botonResistencia">RES</button>
+        <button onclick="cambiodeFlag(0)" class="botonPerso" id="botonVoltaje">VOLT</button>
+        <button onclick="cambiodeFlag(1)" class="botonPerso" id="botonResistencia">RES</button>
+        <button onclick="cambiodeFlag(2)" class="botonPerso" id="botonCorriente">AMP</button>
     </div>
+    <!-- "onclick" detecta la pulsacion de los botones, la funcion que llama se dirige al archivo /calib.js-->
+    
     <div class="contenedorDeLista" id="contenerDeLista"> <ul id="vistaDatos"></ul> </div>
 </body>
 <script src="jquery.min.js"></script>
 <script src="calib.js"></script>
 
-</html>
+</html

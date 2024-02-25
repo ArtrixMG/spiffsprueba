@@ -10,7 +10,7 @@ body {
     flex-direction: column;
     gap: 20px;
     align-items: center;
-  }
+}
 
 .tituloPantalla{
     color: green;
@@ -51,15 +51,4 @@ body {
 .escudo{
     height: 150px;
     width: 150px;
-}
-
-.parrafo{
-    border: 2px solid lime;
-    border-radius: 10px;
-    padding: 5px;
-    color: lime;
-    font-size: 30px;
-    width: 30px;
-    height: 40px;
-    text-align: center;
 }
