@@ -54,7 +54,6 @@ function agregarDatos() {
     verDatos.appendChild(contenidoDeLista);
 
     contenedorLista.scrollTop = contenedorLista.scrollHeight;
-
 }
 
 function callStateValue(ingreso = true) {
