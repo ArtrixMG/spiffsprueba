@@ -67,9 +67,6 @@ function cambiodeFlag(boolean) {
     flag = boolean;
 }
 
-botonVolt.addEventListener('click', cambiodeFlag(false));
-
-botonRes.addEventListener("click", cambiodeFlag(true));
 
 setInterval(() => {
     IngresarDatos();
