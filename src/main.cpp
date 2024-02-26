@@ -55,12 +55,11 @@ void loop()
 
   digitalWrite(32, HIGH);  // Pin de pulso del modo resistencia.
   for(int x = 0; x<=500; x++){
-    v = (analogRead(A6) * 3.3)/ 4095.0;
-    resr = (v/(r1/(r1+r2)));
+    v = (analogRead(A3) * 3.3)/ 4095.0;
+    resr = (v-2.5)/sens;// Formula del sensor ACS712.
     rout = rout+resr;
   }// Promedio de tension.
   resr = rout/500;
-  resr = (resr-2.5)/sens; // Tengo la tension y la divido por la corriente que me diga el sensor.
   resr = 3.3/resr;
   rout = 0;
   digitalWrite(32, LOW); // Pin de pulso del modo resistencia.
