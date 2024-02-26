@@ -11,8 +11,7 @@ String ssidWifi = "TesterWifi_IDO";
 
 float r1 = 1000000.0;
 float r2 = 100000.0;
-double resv = 0.0, vout = 0.0, resr = 0.0, rout = 0.0, resi = 0.0, iout = 0.0,  v = 0.0, sens = 0.1;
-float const corrientePin = 0.012;
+double resv = 0.0, vout = 0.0, resr = 0.0, rout = 0.0, resi = 0.0, iout = 0.0,  v = 0.0, sens = 100;
 
 void iniciarServer(void);
 
@@ -47,24 +46,24 @@ void loop()
   resv = vout/500;
   vout = 0;
 
+  for(int x = 0; x<=500; x++){
+    v = (analogRead(A3) * 3.3)/ 4095.0;
+    resi = (v-2.5)/sens;// Formula del sensor ACS712.
+    iout = iout+resi;
+  }// Promedio de tension.
+  resi = iout/500;
+
   digitalWrite(32, HIGH);  // Pin de pulso del modo resistencia.
   for(int x = 0; x<=500; x++){
     v = (analogRead(A6) * 3.3)/ 4095.0;
-    resi = (v/(r1/(r1+r2)));
-    iout = iout+resi;
-  }// Promedio de tension.
-  resi = resi/500;
-  resi = (resi-2.5)/sens;// Formula del sensor ACS712.
-  digitalWrite(32, LOW); // Pin de pulso del modo resistencia.
-
-  for(int x = 0; x<=500; x++){
-    v = (analogRead(A3) * 3.3)/ 4095.0;
     resr = (v/(r1/(r1+r2)));
     rout = rout+resr;
   }// Promedio de tension.
   resr = rout/500;
-  resr = resr/resi; // Tengo la tension y la divido por la corriente que me diga el sensor.
+  resr = (resr-2.5)/sens; // Tengo la tension y la divido por la corriente que me diga el sensor.
+  resr = 3.3/resr;
   rout = 0;
+  digitalWrite(32, LOW); // Pin de pulso del modo resistencia.
   
   delay(300);
 }
